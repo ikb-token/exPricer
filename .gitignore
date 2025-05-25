@@ -1,0 +1,28 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# Environment and configuration
+.env
+.env.*
+!.env.example
+
+# Generated files
+/downloads/
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Test coverage
+/coverage/
+.phpunit.result.cache
+
+# Temporary files
+*.tmp
+*.temp
+*.cache 

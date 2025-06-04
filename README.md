@@ -8,7 +8,7 @@ This project was developed by the [International Klein Blue token collective](ht
 
 ## License
 
-![CC BY 4.0 License](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png)
+<img alt="CC BY 4.0 License" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" width="150" />
 
 This project can be freely used by all and is licensed under the [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0). When using this project code, you must include attribution to "International Klein Blue (IKB) token collective - ikb-token.co" somewhere on your website.
 
@@ -17,7 +17,7 @@ This project can be freely used by all and is licensed under the [Creative Commo
 - A web hosting account or personal web server that has PHP 7.4 or higher
 - If you wish to use the web checkout system, you will need to have a Stripe account; it's not necessary if you are interested in just using the exPricer API
 
-## Quick Start for Artists
+## Quick Start for Artists: Built-in Checkout System
 
 If you're an artist looking to sell your digital work with dynamic pricing, follow these simple steps:
 
@@ -39,6 +39,10 @@ If you're an artist looking to sell your digital work with dynamic pricing, foll
    - Try a test purchase using Stripe's test card (4242 4242 4242 4242, any expiry date in the future, any 3-digit number as card validation code)
    - If it's a digital work, verify that the download link works and that the same link is sent by email
    - After your test purchase(s) you can reset the sales history by deleting the `sales_state.json` file located in the `data` folder
+
+Checkout page screenshot
+
+<img alt="exPricer-screenshot-CheckoutPage" src="https://github.com/user-attachments/assets/3d945ba9-aac8-4134-bda1-ddb9018b8ac9" width="300" />
 
 ## How It Works
 
@@ -69,6 +73,10 @@ If you need help setting up or using exPricer:
 3. Verify that your web hosting account or personal web server has PHP 7.4 or higher installed
 4. Ensure that your Stripe account is properly set up (e.g. not pending verification, not blocked, etc.)
 5. If you're still having issues, please open an issue here on GitHub
+
+
+***
+***
 
 ## API Documentation for Developers
 
@@ -108,7 +116,7 @@ Calculates prices for different exclusivity levels based on the input parameters
     "work_type": "physical",  // or "digital"
     "copies_sold": 0,         // number of copies already sold
     "max_copies": 100,        // maximum number of copies allowed
-    "min_price": 100          // minimum acceptable price
+    "min_price": 100          // minimum acceptable price in $
 }
 ```
 
@@ -123,7 +131,7 @@ Calculates prices for different exclusivity levels based on the input parameters
             "is_last_copy": false,
             "is_current_level": true
         },
-        // ... more levels ...
+        // ... more exclusivity levels ...
     ],
     "current_state": {
         "total_copies": 100,

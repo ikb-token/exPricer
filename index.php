@@ -173,10 +173,33 @@ try {
             padding: 20px;
             background: #f8f9fa;
             border-radius: 5px;
+            display: flex;
+            gap: 20px;
+        }
+        .product-info .text-content {
+            flex: 1;
         }
         .product-info h2 {
             margin-top: 0;
             color: #007bff;
+        }
+        .product-info .image-container {
+            flex: 0 0 200px;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-info .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
         .exclusivity-levels {
             margin: 30px 0;
@@ -287,7 +310,7 @@ try {
 </head>
 <body>
     <div class="container">
-        <h1>Checkout</h1>
+        <h1>Purchase options</h1>
         
         <?php if ($error): ?>
             <div class="error">
@@ -304,8 +327,18 @@ try {
                 <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 
                 <div class="product-info">
-                    <h2><?php echo htmlspecialchars(Config::get('PRODUCT_NAME')); ?></h2>
-                    <p><?php echo htmlspecialchars(Config::get('PRODUCT_DESCRIPTION')); ?></p>
+                    <div class="text-content">
+                        <h2><?php echo htmlspecialchars(Config::get('PRODUCT_NAME')); ?></h2>
+                        <p><?php echo strip_tags(Config::get('PRODUCT_DESCRIPTION'), '<p><br><strong><em><u><h1><h2><h3><h4><h5><h6><ul><ol><li><blockquote><code><pre><a>'); ?></p>
+                    </div>
+                    <?php 
+                    $productImage = Config::get('PRODUCT_IMAGE');
+                    if (!empty($productImage) && filter_var($productImage, FILTER_VALIDATE_URL)): 
+                    ?>
+                        <div class="image-container">
+                            <img src="<?php echo htmlspecialchars($productImage); ?>" alt="<?php echo htmlspecialchars(Config::get('PRODUCT_NAME')); ?>">
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="sales-info">
@@ -319,7 +352,7 @@ try {
                     <?php if ($copiesAvailable <= 0): ?>
                         <div class="level" style="background-color: #f8d7da; border-color: #dc3545;">
                             <div class="description">
-                                <div class="title">Sold Out</div>
+                                <div class="title">Sold out</div>
                                 <div class="details">All copies have been sold. Thank you for your interest!</div>
                             </div>
                         </div>
@@ -333,13 +366,13 @@ try {
                                 <input type="radio" name="selected_level" value="<?php echo htmlspecialchars(json_encode($level)); ?>" required>
                                 <div class="description">
                                     <?php if ($level['remaining_copies'] === 0): ?>
-                                        <div class="title">Last Copy Option</div>
+                                        <div class="title">Last copy option</div>
                                         <div class="details">This purchase will be the last copy sold. The artist will not sell any more copies after this.</div>
                                     <?php elseif ($index === 0): ?>
-                                        <div class="title">Limited Edition</div>
+                                        <div class="title">Limited edition</div>
                                         <div class="details"><?php echo $level['remaining_copies']; ?> copies will be available for sale after this purchase.</div>
                                     <?php else: ?>
-                                        <div class="title">Pay For More Exclusivity</div>
+                                        <div class="title">Pay for more exclusivity</div>
                                         <div class="details"><?php echo $level['remaining_copies']; ?> copies will be available for sale after this purchase.</div>
                                     <?php endif; ?>
                                 </div>
@@ -350,7 +383,7 @@ try {
                 </div>
                 
                 <?php if ($copiesAvailable > 0): ?>
-                    <button type="submit" class="checkout-button">Proceed to Payment</button>
+                    <button type="submit" class="checkout-button">Proceed to payment</button>
                 <?php endif; ?>
             </form>
         <?php endif; ?>

@@ -121,6 +121,11 @@ class Config {
             
             $value = self::$config[$key];
             
+            // Skip validation for empty PRODUCT_IMAGE
+            if ($key === 'PRODUCT_IMAGE' && empty($value)) {
+                continue;
+            }
+            
             if (is_string($validator)) {
                 // Regex validation
                 if (preg_match($validator, $value) !== 1) {

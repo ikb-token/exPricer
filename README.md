@@ -38,11 +38,12 @@ If you're an artist looking to sell your digital work with dynamic pricing, foll
    - Visit the web URL of your web hosting account or web server, remembering to add the folder name you created. For example, this could look something like https://hosting-company.com/myaccount/buy
    - Try a test purchase using Stripe's test card (4242 4242 4242 4242, any expiry date in the future, any 3-digit number as card validation code)
    - If it's a digital work, verify that the download link works and that the same link is sent by email
+   - If you would like to adjust the text of the emails sent to buyers, look inside `success.php`
    - After your test purchase(s) you can reset the sales history by deleting the `sales_state.json` file located in the `data` folder
 
 Checkout page screenshot
 
-<img alt="exPricer-screenshot-CheckoutPage" src="https://github.com/user-attachments/assets/3d945ba9-aac8-4134-bda1-ddb9018b8ac9" width="300" />
+<img alt="exPricer screenshot: Checkout page" src="https://github.com/user-attachments/assets/4f79ca6a-6187-4428-b3a1-474dacc64bfc" width="300" />
 
 ## How It Works
 

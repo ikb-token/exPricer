@@ -58,7 +58,7 @@ Checkout page screenshot
    - They see different pricing options based on exclusivity
    - They select their preferred option and enter their email address
    - They complete payment through Stripe
-   - If it is a digital item, they receive a download link on a payment success page, and via email (if configured); if it is a physical item, they receive a simple success message and an email requesting their full shipping address
+   - If it is a digital item, they receive a download link on a payment success page and via email; if it is a physical item, they receive a simple success message and an email requesting their full shipping address
 
 ## Important Notes
 

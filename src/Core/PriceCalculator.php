@@ -92,11 +92,10 @@ class PriceCalculator {
                 );
                 
                 $prices[] = [
-                    'remaining_copies' => $level,
+                    'remaining_copies' => $level - 1,
                     'price' => $price,
-                    'percentage_of_edition' => round(($level / $maxCopies) * 100, 1),
-                    'is_last_copy' => $level === 1,
-                    'is_current_level' => $level === $remainingCopies
+                    'percentage_of_edition' => round((($level - 1) / $maxCopies) * 100, 1),
+                    'is_last_copy' => $level === 1
                 ];
             }
         }

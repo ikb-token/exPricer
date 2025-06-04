@@ -115,7 +115,7 @@ Calculates prices for different exclusivity levels based on the input parameters
 {
     "work_type": "physical",  // or "digital"
     "copies_sold": 0,         // number of copies already sold
-    "max_copies": 100,        // maximum number of copies allowed
+    "max_copies": 200,        // maximum number of copies allowed
     "min_price": 100          // minimum acceptable price in $
 }
 ```
@@ -125,18 +125,17 @@ Calculates prices for different exclusivity levels based on the input parameters
 {
     "exclusivity_levels": [
         {
-            "remaining_copies": 100,
-            "price": 120.00,
-            "percentage_of_edition": 100.0,
-            "is_last_copy": false,
-            "is_current_level": true
+            "remaining_copies": 199,        // number of copies that would be left for sale after this purchase
+            "price": 120,
+            "percentage_of_edition": 99.5,  // percentage of edition that would be left after this purchase
+            "is_last_copy": false
         },
         // ... more exclusivity levels ...
     ],
     "current_state": {
-        "total_copies": 100,
+        "total_copies": 200,
         "copies_sold": 0,
-        "copies_remaining": 100,
+        "copies_remaining": 200,
         "work_type": "physical",
         "min_price": 100,
         "work_type_factor": 1.2,

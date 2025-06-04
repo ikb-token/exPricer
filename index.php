@@ -91,6 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($selectedLevel['remaining_copies']) || !isset($selectedLevel['price'])) {
             throw new \RuntimeException('Invalid exclusivity level format');
         }
+
+        // Get current sales info for the description
+        $salesTracker = new SalesTracker();
+        $totalCopies = Config::get('MAX_COPIES');
+        $copiesSold = $salesTracker->getCopiesSold();
+        $copiesAvailable = $totalCopies - $copiesSold;
         
         // Create Stripe checkout session
         $sessionData = [
@@ -98,9 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'line_items[][price_data][currency]' => 'usd',
             'line_items[][price_data][product_data][name]' => Config::get('PRODUCT_NAME'),
             'line_items[][price_data][product_data][description]' => sprintf(
-                '%s (Exclusivity: %d copies remaining)',
-                Config::get('PRODUCT_DESCRIPTION'),
-                $selectedLevel['remaining_copies']
+                '%s, limited edition (Effective number of copies eliminated from the edition with this purchase: %d)',
+                ucfirst(Config::get('WORK_TYPE')),
+                $copiesAvailable - $selectedLevel['remaining_copies']
             ),
             'line_items[][price_data][unit_amount]' => $selectedLevel['price'] * 100, // Convert to cents
             'line_items[][quantity]' => 1,
@@ -359,21 +365,17 @@ try {
                     <?php else: ?>
                         <?php foreach ($prices['exclusivity_levels'] as $index => $level): ?>
                             <div class="level">
-                                <?php 
-                                // Adjust the remaining copies to reflect what will be left after purchase
-                                $level['remaining_copies'] = $level['remaining_copies'] - 1;
-                                ?>
                                 <input type="radio" name="selected_level" value="<?php echo htmlspecialchars(json_encode($level)); ?>" required>
                                 <div class="description">
                                     <?php if ($level['remaining_copies'] === 0): ?>
                                         <div class="title">Last copy option</div>
                                         <div class="details">This purchase will be the last copy sold. The artist will not sell any more copies after this.</div>
                                     <?php elseif ($index === 0): ?>
-                                        <div class="title">Limited edition</div>
+                                        <div class="title">Standard limited edition copy</div>
                                         <div class="details"><?php echo $level['remaining_copies']; ?> copies will be available for sale after this purchase.</div>
                                     <?php else: ?>
                                         <div class="title">Pay for more exclusivity</div>
-                                        <div class="details"><?php echo $level['remaining_copies']; ?> copies will be available for sale after this purchase.</div>
+                                        <div class="details">Only <?php echo $level['remaining_copies']; ?> copies will be available for sale after this purchase.</div>
                                     <?php endif; ?>
                                 </div>
                                 <span class="price">$<?php echo number_format($level['price'], 2); ?></span>

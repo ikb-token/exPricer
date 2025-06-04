@@ -27,11 +27,11 @@ If you're an artist looking to sell your digital work with dynamic pricing, foll
 
 2. **Configure Your Settings**
    - Make a copy of the sample configuration file `.env.example` and name the new copy `.env`
-   - Fill in your settings in this `.env` file (this will include details about the digital file you are selling, the maximum number of copies you are selling, the minimum price, and technical details such as your Stripe account keys and email aaccount).
+   - Fill in your settings in this `.env` file (this will include details about the digital file you are selling, the maximum number of copies you are selling, the minimum price, and technical details such as your Stripe account keys and email account).
    - If you don't have a Stripe account go here: https://dashboard.stripe.com/register, and to learn about where to get your Stripe account keys, refer to: https://docs.stripe.com/keys
 
 3. **Set Up Your Files**
-   - Upload all exPricer project files to your web hosting account or personal web server. We recommend putting everything in a new folder, named as you like, or simply `buy`. (We decided to keep it simple, just use FTP/SFTP and copy over everything as is, in addition to your .env file of course!)
+   - Upload all exPricer project files to your web hosting account or personal web server. We recommend putting everything in a new folder, named as you like, or simply `buy`. (We decided to keep it simple, just use FTP/sFTP and copy over everything as is, in addition to your .env file of course!)
    - Upload your digital file to the `downloads` folder
 
 4. **Test Your Setup**
@@ -69,7 +69,7 @@ Checkout page screenshot
 ## Artist Support
 
 If you need help setting up or using exPricer:
-1. Make sure you've followed all the steps in the Quick Start for Arists section
+1. Make sure you've followed all the steps in the [Quick Start for Artists](#quick-start-for-artists-built-in-checkout-system) section
 2. Check that your `.env` file is properly configured
 3. Verify that your web hosting account or personal web server has PHP 7.4 or higher installed
 4. Ensure that your Stripe account is properly set up (e.g. not pending verification, not blocked, etc.)
